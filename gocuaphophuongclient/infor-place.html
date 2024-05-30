@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Gõ Cửa Phố Phường</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <link rel="stylesheet" href="./css/map.css">
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/slick.css">
+  <link rel="stylesheet" href="./css/infor-place.css">
+  <link rel="stylesheet" href="./fonts/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="./fonts/fontawesome-free-6.4.0-web/fontawesome-free-6.4.0-web/css/all.css">
+  
+  <script src="https://vjs.zencdn.net/5.10.4/video.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.js"></script>
+  <script src="https://rawgit.com/yanwsh/videojs-panorama/master/dist/videojs-panorama.v5.js"></script>
+  <link rel="stylesheet" href=" https://vjs.zencdn.net/5.10.4/video-js.css" />
+  <style>
+    .player-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      z-index: 9999999;
+      
+      .player {
+        position: absolute; 
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9999999;
+      }
+    }
+    .video-js .vjs-tech {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+}
+     </style>
+  <!-- script
+  ================================================== -->
+  <script src="js/modernizr.js"></script>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
+  tabindex="0"  >
+ 
+
+
+ 
+
+  <header id="header" class="site-header header-scrolled position-fixed text-black bg-light" style="z-index: 99;">
+    <nav id="header-nav" class="navbar navbar-expand-lg px-3 " style="background: #f2ece2">
+      <div class="container-fluid">
+        <ul class="navbar-translate">
+          <a href="">
+            <li class="nav-item heveticaneu">VIETNAM</li>
+          </a>
+          <a href=""> 
+            <li class="nav-item heveticaneu">ENGLISH</li>
+          </a>
+          <a href="">
+            <li class="nav-item heveticaneu">CHINA</li>
+          </a>
+        </ul>
+        <a class="navbar-brand" href="index.html">
+          <img src="./images/01.png" class="logo"  >
+        </a>
+        <button class="navbar-toggler fas fa-bars d-flex d-lg-none order-3 p-2 " type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <!-- <svg class="navbar-icon fas fa-bars"> -->
+          <use xlink:href="#navbar-icon"></use>
+        </button>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
+          <div class="offcanvas-header px-4 pb-0">
+            <a class="navbar-brand" href="index.html">
+              <img src="./images/01.png" class="logo">
+            </a>
+            <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close"
+              data-bs-target="#bdNavbar"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul id="navbar" class="navbar-nav  justify-content-end align-items-center flex-grow-1 ">
+              <li class="nav-item">
+                <a class="nav-link me-4 heveticaneu" href="./search-infor-city.html">Tham quan phố phường</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-4 heveticaneu" href="#company-services">Về chúng tôi</a>
+              </li>
+              <div class="header-with-search">
+                <label for="mobile-search-checkbox" class="header__mobile-search">
+                  <i class="header__mobile-search-icon fas fa-search" style="color: #b7b7b7;"></i>
+                </label>
+                <input type="checkbox" hidden="" id="mobile-search-checkbox" class="header__search-checkbox">
+
+                <div class="header__search" style="background-image: url(./images/03.png);">
+                  <div class=" header__search-input-wrap">
+                    <form autocomplete="off" class=" header__search-input">
+                      <div>
+                        <input type="text" id="input" class=" header__search-input heveticaneu" placeholder="search"
+                          style="background-color: #a9c0b2;">
+                      </div>
+                      <ul class="list">
+                      </ul>
+                    </form>
+                  </div>
+
+                  <button id="voice-search-button" onclick="startSpeechRecognition()" class="header__search-btn">
+                    <img class="header__search-btn-icon" src="./images/04.png" alt="" style="color: #58574b;">
+                  </button>
+
+                  <button class="header__search-btn">
+                    <img src="./images/05.png" alt="" class="header__search-btn-icon"
+                      style="color: #58574b; width: 30px;">
+                  </button>
+                </div>
+
+                <li class="nav-item"
+                  style="background-image: url(./images/06.png); background-repeat: round; width: 60px; height: 60px; margin-left: 10px;">
+                  <div class="user-items pl-8">
+                    <ul class="d-flex justify-content-end list-unstyled">
+
+                      <!-- <li class="nav-item__bt fa-solid fa-volume-high"> -->
+                      <a href="#" class="volume-button">
+                        <audio id="background-music" loop autoplay>
+                          <source src="./music/EmXinh-MONOOnionn-12581640.mp3" type="audio/mp3">
+                          Your browser does not support the audio element.
+                        </audio>
+
+                        <button id="toggle-icon" class="nav-item__bt fa-solid fa-volume-high"></button>
+                      </a>
+                      <!-- </li> -->
+                    </ul>
+                  </div>
+                </li>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+   
+    
+  </div>
+  <img src="./images/anhnen.png" style="position: absolute;z-index: -1; ;">
+<div class="chia2cot" style="padding-top: 157px;display: flex;">
+  <div class="coltrai" style="padding: 10px;width: 1350px;">
+    <!-- ------------------ -->
+    <div class="slider"  >
+      <div class="list" style="  z-index: -2;">
+        <div class="item" >
+          <img src="./images/banner-map-1.webp" alt="" >
+        </div>
+        <div class="item">
+          <img src="./images/banner-map-2.jpg" alt="" c>
+        </div>
+        <div class="item">
+          <img src="./images/banner-map-3.jpg" alt="" >
+        </div>
+      </div>
+      <div class="buttons">
+        <button id="prev" style="background-image: url(./images/51.png); background-repeat: round;margin-left: -25px;z-index: 3;"></button>
+        <button id="next" style="background-image: url(./images/52.png); background-repeat: round;margin-right: -25px;z-index: 3;"></button>
+      </div>
+      <ul class="dots">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <div class="note" style="font-size: 18px;padding-left: 15px;">
+         <i> Chú thích ảnh</i>
+        </div>
+      </ul>
+    </div>
+    <!-- ------------------ -->
+  </div>
+  <div class="justify-content-center align-items-center mt-auto mb-auto" style="padding: 30px;padding-top:50px;padding-right:100px;width:570px">
+    <!-- -------------------------- -->
+    <div class="title-place" style="font-size: 30px; font-weight: 550; color: #58574b; font-family: bahnschrift;">
+      Ô QUAN CHƯỞNG
+    </div>
+    <!-- heveticaneudam bahnschrift heveticaneu inect -->
+    <div class="content-place" style="text-align: justify;font-size: 18px;font-family: heveticaneu;white-space: normal; overflow: hidden; text-overflow: ellipsis;height: 400px; ">
+      Phố Hàng Bạc, xưa là phường nghề đúc bac, được coi là giàu có bậc nhất ở Kinh thành Thăng Long. Trải
+      qua nhiều thế kỷ với những biến động thời gian, nhưng phố Hàng Bạc vẫn giữ được nhiều nét kiến trúc, nếp
+      sống làng nghề xưa. Nhìn từ góc Phố Hàng Bạc, xưa là phường nghề đúc bạc, được coi là giàu có bậc nhất Kinh
+      thành Thăng Long. Phố Hàng Bạc, xưa là phường nghề đúc bac, được coi là giàu có bậc nhất ở Kinh thành Thăng Long. Trải
+      qua nhiều thế kỷ với những biến động thời gian, nhưng phố Hàng Bạc vẫn giữ được nhiều nét kiến trúc, nếp
+      sống làng nghề xưa. Nhìn từ góc Phố Hàng Bạc, xưa là phường nghề đúc bạc, được coi là giàu có bậc nhất Kinh
+      thành Thăng Long.
+    </div>
+    <div class="btn-place" style="margin-top: 50px;margin-left: -14px;">
+      <ul class="nav" style="padding: 20px 5px;">
+        <li class="nav-item">
+          <div class="user-items pl-8">
+            <ul class="d-flex justify-content-end list-unstyled">
+              <!-- <li class="nav-item__bt fa-solid fa-volume-high"> -->
+              <img src="./images/27.png" width="42px" alt="">
+              <!-- <button id="toggle-icon" class="nav-item__bt fas fa-cloud" style="background-color: #ceb1c0; box-shadow: 0px 2px #ceb1c0;"></button> -->
+              <!-- </li> -->
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="user-items pl-8">
+            <ul class="d-flex justify-content-end list-unstyled">
+              <!-- <li class="nav-item__bt fa-solid fa-volume-high"> -->
+              <a href="#" class="volume-button">
+                <audio id="background-music" loop autoplay>
+                  <source src="" type="audio/mp3">
+                  Your browser does not support the audio element.
+                </audio>
+                <img src="./images/26.png" width="40px" alt="" id="toggle-icon">
+                <!-- <button id="toggle-icon" class="nav-item__bt fa-solid fa-volume-high"></button> -->
+              </a>
+              <!-- </li> -->
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <div class="user-items pl-8">
+            <ul class="d-flex justify-content-end list-unstyled">
+              <!-- <li class="nav-item__bt fa-solid fa-volume-high"> -->
+              <img src="./images/28.png" width="40px" alt="" class="nav__item-btn--play" onclick="enableAutoplayvideo360()">
+              <!-- <button id="toggle-icon" class="nav__item-btn--play nav-item__bt " style="background-color: #a5c3d2; box-shadow: 0px 2px #a5c3d2; padding: 4px 4px;">360</button> -->
+              <!-- </li> -->
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="user-items pl-8">
+            <ul class="d-flex justify-content-end list-unstyled">
+              <!-- <li class="nav-item__bt fa-solid fa-volume-high"> -->
+              <img src="./images/29.png" width="40px" alt="" class="nav__item-btn--play" onclick="enableAutoplay()">
+              <!-- <button id="toggle-icon" class="nav__item-btn--play nav-item__bt  fas fa-play" style="background-color: #e2c693; box-shadow: 0px 2px #e2c693; padding: 8px 10px;"></button> -->
+              <!-- </li> -->
+            </ul>
+          </div>
+        </li>
+
+
+
+      </ul>
+    </div>
+    <!-- -------------------------- -->
+  </div>
+</div>
+<div class="player-wrapper" style="z-index: 999999;position: fixed;top: 0;display: none;"id="video360_show">
+  <video id="player" class="player video-js vjs-default-skin vjs-big-play-centered" crossorigin="anonymous" preload="metadata" autoplay controls name="video-js" >
+    <!-- <source   src="./video/video_test.mp4" type="video/mp4"> -->
+    <source  src="https://yanwsh.github.io/videojs-panorama/assets/shark.mp4" class="player_html5_api2">
+  </video>
+  <div class="icon_video2" onclick="anvideo360()" style="z-index: 99999999;display: none;" id="phongtovideo360">
+    <img src="./images/53.png" width="40px">
+  </div>
+</div>
+<div class="video_show" style="display: none;" id="video_show">
+  <div class="icon_video1"  onclick="anvideo()" style="z-index: 999999;">
+    <img src="./images/53.png" width="40px">
+  </div>
+  <div class="icon_video2" onclick="phongtovideo()" style="z-index: 999999;" id="phongto1">
+    <img src="./images/54.png" width="40px">
+  </div>
+  <div class="icon_video2" onclick="phongnhovideo()" style="z-index: 999999;display: none;" id="phongto2">
+    <img src="./images/54.png" width="40px">
+  </div>
+  <video id="myVideo" width="100%" height="100%"  controls="controls" style="object-fit: cover;" >
+    <source src="./video/video_test.mp4" type="video/mp4">
+  </video>
+</div>
+  <!-- Modal -->
+  <script>
+     
+    
+   
+  </script>
+  <!-- popupvideo -->
+  <script> 
+    function enableAutoplayvideo360(){
+      document.getElementById('video360_show').style.display='';
+      document.getElementById('phongtovideo360').style.display='';
+   
+      var options = {
+  plugins: {
+    panorama: {
+      clickAndDrag: true,
+      clickToToggle: true,
+      autoMobileOrientation: true,
+      backToVerticalCenter: false,
+      backToHorizonCenter: false
+    }
+  }
+};
+var video = document.getElementById('player');
+var player = videojs('player', options, function() {
+  video.autoplay = true;
+  video.load();
+});
+document.getElementById('player_html5_api').classList.remove('video-js');
+      document.getElementsByName('video-js').style.visible='visible';
+    }
+    function anvideo360(){
+      document.getElementById('video360_show').style.display='none';
+      document.getElementById('phongtovideo360').style.display='none';
+      var options = {
+  plugins: {
+    panorama: {
+      clickAndDrag: false,
+      clickToToggle: false,
+      autoMobileOrientation: true,
+      backToVerticalCenter: false,
+      backToHorizonCenter: false
+    }
+  }
+};
+var video = document.getElementById('player');
+var player = videojs('player', options, function() {
+  video.autoplay = false;
+  video.load();
+});
+
+    }
+    function enableAutoplay(){
+      document.getElementById('video_show').style.display='';
+      let vid = document.getElementById("myVideo");
+      vid.autoplay = true;
+        vid.load();
+    }
+    function phongtovideo(){
+      let vid = document.getElementById("myVideo");
+      vid.autoplay = true;
+       
+      document.getElementById('phongto1').style.display='none';
+      document.getElementById('phongto2').style.display='';
+      var element = document.getElementById("video_show");
+      element.classList.remove("video_show"); 
+      element.classList.add("video_shownew"); 
+     
+    }
+    function phongnhovideo(){
+      document.getElementById('phongto2').style.display='none';
+      document.getElementById('phongto1').style.display='';
+      var element = document.getElementById("video_show");
+      element.classList.add("video_show"); 
+      element.classList.remove("video_shownew"); 
+      let vid = document.getElementById("myVideo");
+      vid.autoplay = false;
+        vid.load();
+    }
+    function anvideo(){
+      document.getElementById('video_show').style.display='none';
+      let vid = document.getElementById("myVideo");
+      vid.autoplay = false;
+        vid.load();
+    }
+    // Modal video
+    function handleModalVideo() {
+      let videos = document.querySelectorAll('.nav__item-btn--play');
+      let modalVideo = document.querySelector('.video_show');
+      let iframeModalVideo = document.querySelector('.popupvideo__inner-iframe');
+      let btnClose = document.querySelector('.popupvideo .popupvideo__inner .popupvideo__inner-iframe .popupvideo__inner-close');
+
+      videos.forEach(function (video) {
+        video.addEventListener('click', function () {
+          // show modal
+          modalVideo.classList.add('active');
+          // Get Data ID
+          // let dataID = video.getAttribute('data-video-src');
+          // console.log(dataID)
+          // Set ID iframe
+          // iframeModalVideo.setAttribute('src','');
+          document.getElementsByClassName('video_show').style.display='';
+          enableAutoplay();
+        })
+      });
+
+
+
+      let vid = document.getElementById("myVideo");
+      //  vid.autoplay = true;
+      function enableAutoplay() {
+        vid.autoplay = true;
+        vid.load();
+      }
+
+      function disableAutoplay() {
+        vid.autoplay = false;
+        vid.load();
+      }
+
+
+
+      function closeModal() {
+        // Hide modal
+        modalVideo.classList.remove('active');
+
+        // Empty Src Iframe
+        iframeModalVideo.setAttribute("src", "");
+      }
+      btnClose.addEventListener('click', function () {
+        closeModal();
+
+      })
+      modalVideo.addEventListener('click', function () {
+        closeModal();
+        disableAutoplay();
+      });
+    }
+    handleModalVideo();
+  </script>
+  <!-- <script>
+    
+    // Modal video
+    function handleModalVideo() {
+      let videos = document.querySelectorAll('.nav__item-btn--play');
+      let modalVideo = document.querySelector('.popupvideo');
+      let iframeModalVideo = document.querySelector('.popupvideo__inner-iframe');
+      let btnClose = document.querySelector('.popupvideo .popupvideo__inner .popupvideo__inner-iframe .popupvideo__inner-close');
+
+      videos.forEach(function (video) {
+        video.addEventListener('click', function () {
+          // show modal
+          modalVideo.classList.add('active');
+          // Get Data ID
+          // let dataID = video.getAttribute('data-video-src');
+          // console.log(dataID)
+          // Set ID iframe
+          // iframeModalVideo.setAttribute('src','');
+          enableAutoplay();
+        })
+      });
+
+
+
+      let vid = document.getElementById("myVideo");
+      //  vid.autoplay = true;
+      function enableAutoplay() {
+        vid.autoplay = true;
+        vid.load();
+      }
+
+      function disableAutoplay() {
+        vid.autoplay = false;
+        vid.load();
+      }
+
+
+
+      function closeModal() {
+        // Hide modal
+        modalVideo.classList.remove('active');
+
+        // Empty Src Iframe
+        iframeModalVideo.setAttribute("src", "");
+      }
+      btnClose.addEventListener('click', function () {
+        closeModal();
+
+      })
+      modalVideo.addEventListener('click', function () {
+        closeModal();
+        disableAutoplay();
+      });
+    }
+    handleModalVideo(); -->
+  <!-- </script> -->
+
+
+  <!-- Slideshow Banner -->
+  <!-- <script type="text/javascript">
+    var counter = 1;
+    setInterval(function () {
+      document.getElementById('radio' + counter).checked = true;
+      counter++;
+      if (counter > 3) {
+        counter = 1;
+      }
+    }, 3000); 
+  </script> -->
+  <!-- End Slideshow Banner -->
+
+  <!-- lETTER -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const letters = document.querySelectorAll('.letter');
+
+      function getRandomColor() {
+        const lettersColors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c'];
+        const randomIndex = Math.floor(Math.random() * lettersColors.length);
+        return lettersColors[randomIndex];
+      }
+
+      function playSound(note) {
+        const audio = new Audio(`./music/note${note}.mp3`);
+        audio.play();
+      }
+
+      letters.forEach((letter, index) => {
+        // Màu ngẫu nhiên khi tải trang
+        letter.style.backgroundColor = getRandomColor();
+        // Màu ngẫu nhiên khi cuộn chuột
+        window.addEventListener('scroll', function () {
+          const color = getRandomColor();
+          letter.style.backgroundColor = color;
+        });
+        // Màu ngẫu nhiên khi di chuột vào chữ cái
+        letter.addEventListener('mouseenter', function () {
+          const color = getRandomColor();
+          letter.style.backgroundColor = color;
+
+          // Phát âm thanh tương ứng với chữ cái
+          playSound(index + 1); // Thay đổi 1 thành số tương ứng với chữ cái nếu cần
+        });
+
+        // Khôi phục màu khi di chuột ra khỏi chữ cái
+        letter.addEventListener('mouseleave', function () {
+          const color = getRandomColor();
+          letter.style.backgroundColor = color;
+        });
+      });
+    });
+
+
+
+  </script>
+  <!-- // script music -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var music = document.getElementById("background-music");
+      var iconButton = document.getElementById("toggle-icon");
+
+      iconButton.addEventListener("click", function () {
+        if (music.paused) {
+          music.play();
+          icon.classList.toggle("fa-volume-mute");
+        } else {
+          music.pause();
+          icon.classList.toggle("fa-volume-up");
+        }
+        var icon = iconButton.querySelector("i");
+      });
+    });
+
+  </script>
+
+  <!-- search -->
+  <script>
+    let citys = [
+      "Phố Hàng Bạc ",
+      "Phố Hàng Mây",
+      "Phố Hàng Bông",
+      "Phố Hàng Bè",
+      "Phố Hàng Giấy",
+      "Phố Đồng Lạc",
+      "Phố Lãn Ông",
+      "Phố Nguyễn Du",
+      "Phố Hàng Đường",
+      "Phố Hàng Mành",
+      "Phố Hàng Hòm",
+      "Phố Hàng Gà",
+      "Phố Hàng Đồng",
+      "Phố Hàng Bồ"
+
+    ];
+    // Sort citys in ascending order
+    let sortedCitys = citys.sort();
+
+    // reference to
+    let input = document.getElementById("input");
+
+    // Excute function on keyup
+    input.addEventListener("keyup", (e) => {
+      // loop through above array
+      // Initially remove al elements ( so if user erases a letter or adds new letter then clean previous output)
+      removeElements();
+      for (let i of sortedCitys) {
+        // convert input to lowercase and compare with each string
+
+        if (i.toLowerCase().startsWith(input.value.toLowerCase()) &&
+          input.value != ""
+        ) {
+          // create li element
+          let listItem = document.createElement("li");
+          // One common class name
+          listItem.classList.add("list-items");
+          listItem.style.cursor = "pointer";
+          listItem.setAttribute("onclick", "displayCitys('" + i + "')");
+          // Display matched part in bold
+          let word = "<b>" + i.substr(0, input.value.length) + "</b>";
+          word += i.substr(input.value.length);
+          // display the value in array 
+          listItem.innerHTML = word;
+          document.querySelector(".list").appendChild(listItem);
+
+        }
+      }
+    })
+    function displayCitys(value) {
+      input.value = value;
+      removeElements();
+    }
+    function removeElements() {
+      // clear all the item
+      let items = document.querySelectorAll(".list-items");
+      items.forEach((item) => {
+        item.remove();
+      });
+    }
+
+
+  </script>
+
+  <!-- script voice search -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("search-input");
+      const voiceSearchButton = document.getElementById("voice-search-button");
+
+      function startSpeechRecognition() {
+        const recognition = new webkitSpeechRecognition(); // Sử dụng webkitSpeechRecognition cho trình duyệt Chrome
+        recognition.lang = "vi-VN";
+
+        recognition.onresult = function (event) {
+          const result = event.results[0][0].transcript;
+          searchInput.value = result;
+        };
+
+        recognition.start();
+      }
+
+      window.startSpeechRecognition = startSpeechRecognition;
+    });
+
+  </script>
+  <!-- END LETTER -->
+  <!-- video 360 Độ -->
+
+  <script src="js/jquery-1.11.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="js/plugins.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+
+</html>

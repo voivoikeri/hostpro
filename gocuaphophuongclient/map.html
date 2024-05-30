@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Gõ Cửa Phố Phường</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/map.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="./fonts/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="./fonts/fontawesome-free-6.4.0-web/fontawesome-free-6.4.0-web/css/all.css">
+ <style>
+
+
+ </style>
+
+    <!-- script
+  ================================================== -->
+  <script src="js/modernizr.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDel-i9moiO4qj7yCe-LNGcj90gB4DCO-w&map_ids=29e6bff28ef0fdf"></script>
+    <script>
+	    var map = null;
+        let modalOpen = false;
+		var marker = null;
+		var marker2 = null;
+		var marker3 = null;
+		var marker4 = null;
+        function initMap() {
+            var location = { lat: 21.031478536186288, lng: 105.85513276018229 };
+            var location2 = { lat: 21.030452085633023, lng: 105.84994000369987 };
+            var location3 = { lat: 21.030301872763907, lng: 105.84964496071792 };
+            var location4 = { lat: 21.029605884494323, lng: 105.84985417301422 };
+             map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 17,
+                center: location,
+                mapId: '29e6bff28ef0fdf',
+				mapTypeControl: false,
+				  mapTypeControlOptions: {
+					style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+					position: google.maps.ControlPosition.TOP_CENTER,
+				  },
+				  zoomControl: true,
+				  zoomControlOptions: {
+					style: google.maps.ZoomControlStyle.SMALL,
+					position: google.maps.ControlPosition.TOP_CENTER,
+				  },
+				  scaleControl: true,
+				  streetViewControl: true,
+				  streetViewControlOptions: {
+					position: google.maps.ControlPosition.LEFT_TOP,
+				  },
+				  fullscreenControl: true,
+            });
+/*
+            var yellowIcon = 'images/48.png';
+            var greenIcon = 'images/49.png';
+
+            marker = new google.maps.Marker({
+                position: location,
+                map: map,
+				animation: google.maps.Animation.BOUNCE,
+                title: 'Hồ Gươm, Hà Nội',
+                icon: yellowIcon
+            });
+			
+			marker2 = new google.maps.Marker({
+                position: location2,
+                map: map,
+				animation: google.maps.Animation.BOUNCE,
+                title: 'Hồ Gươm, Hà Nội',
+                icon: yellowIcon
+            });
+			
+			marker3 = new google.maps.Marker({
+                position: location3,
+                map: map,
+				animation: google.maps.Animation.BOUNCE,
+                title: 'Hồ Gươm, Hà Nội',
+                icon: yellowIcon
+            });
+			
+			marker4 = new google.maps.Marker({
+                position: location4,
+                map: map,
+				animation: google.maps.Animation.BOUNCE,
+                title: 'Hồ Gươm, Hà Nội',
+                icon: yellowIcon
+            });
+*/			
+            var contentString2 = '<div class="custom-infowindow" style="display: flex; align-items: stretch; width: 550px;">\n \
+                    <div style="flex-basis: 33.33%; flex-shrink: 0;">\n\
+                        <img src="https://statics.vinpearl.com/ho-hoan-kiem-6_1688884576.jpg" alt="Hoàn Kiếm" style="width: 100%; height: 100%; object-fit: cover; margin-right: 10px;">\n \
+                    </div>\n \
+                    <div style="flex-basis: 66.67%; padding-left: 20px; display: flex; flex-direction: column; justify-content: space-between;">\n \
+                        <h1 style="margin: 0; font-size: 30px; padding-bottom: 15px;">Hồ Gươm (Hồ Hoàn Kiếm)</h1>\n \
+                        <p style="margin: 0; border-bottom: 1px solid #80797a; padding-bottom: 8px;">Hồ Hoàn Kiếm, còn gọi là hồ Gươm, nằm ở trung tâm Hà Nội. Với tháp Rùa lịch sử, hồ là biểu tượng văn hóa và tâm linh quan trọng của thành phố, thu hút du khách bởi vẻ đẹp thiên nhiên và sự linh thiêng. Đây là điểm đến yêu thích để thư giãn, tản bộ và khám phá văn hóa đặc trưng của Việt Nam.</p>\n \
+                        <a href="#" style="color: #1a73e8; text-decoration: none;" onmouseover="this.style.textDecoration=\'underline\';" id="more-info" onmouseout="this.style.textDecoration=\'none\';">Xem thêm &gt;&gt;&gt;</a>\n \
+                    </div>\n \
+                </div>\n \
+            ';
+			
+			var contentString = '  <div onclick="anhinhgionuoc()" id="menochitiet" style="margin-left: -140px;"> \n\
+										<div class="modal-dialog modal-md" style="top: 5%;"> \n\
+											<div class="modal-content" \n\
+											  style="display: flex; width: 670px;height:250px ;flex-direction: row;background-image: url(./images/50.png); "> \n\
+											  <div class="modal-content_image" style="margin-right: 18px;"> \n\
+												<img src="./images/banner-map-1.webp" alt="" style="width: 200px; height: 200px; object-fit: cover;"> \n\
+											  </div> \n\
+											  <div class="modal-content_infor"> \n\
+												<div class="infor-title" style="font-size: 30px; font-weight: 600; color: #58574a;font-family: bahnschrift;"> \n\
+												  Ô Quan Chưởng \n\
+												</div> \n\
+												<div class="infor-content" style="float:left;border-bottom: 1px solid #c6d2c4; padding: 5px; text-align: justify; font-family: cambria;font-size: 16px;line-height: 1.4em;"> \n\
+												  Phố Hàng Bạc, xưa là phường nghề đúc bạc, được coi là giàu có bậc nhất ở Kinh thành Thăng Long. Trải qua \n\
+												  nhiều thế kỷ với những biến động thời gian, nhưng phố Hàng Bạc vẫn giữ được nhiều nét kiến trúc, nếp sống \n\
+												  làng nghề xưa. Nhìn từ góc \n\
+												</div> \n\
+												<div class="infor-more" style="float: right; z-index: 2000;"> \n\
+												  <a href="./infor-place.html" style="z-index: 2000;font-size: 20px;color: #58574a;">XEM CHI TIẾT <i class="fas fa-angle-double-right"></i></a> \n\
+												</div> \n\
+											</div> \n\
+										  </div> \n\
+										</div> \n\
+									  </div> \n\
+            ';
+			
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            marker.addListener('click', function () {
+                marker.setIcon(greenIcon);
+				document.getElementById("hinhanh2").click();
+                //infowindow.open(map, marker);
+            });
+
+            infowindow.addListener('closeclick', function () {
+                marker.setIcon(yellowIcon);
+            });
+        }
+
+        function openModal() {
+            modalOpen = true;
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            modalOpen = false;
+            document.getElementById("myModal").style.display = "none";
+            //document.getElementById("map").querySelector('.gm-style-iw').parentNode.style.visibility = 'hidden';
+            setTimeout(function () {
+                //document.querySelector('.gm-style-iw').parentNode.style.visibility = 'visible';
+            }, 300);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.body.addEventListener("click", function (event) {
+                if (event.target.id === "more-info") {
+                    event.preventDefault();
+                    openModal();
+                }
+            });
+
+            document.getElementsByClassName("close")[0].onclick = function () {
+                closeModal();
+            };
+
+            window.onclick = function (event) {
+                if (event.target === document.getElementById("myModal")) {
+                    closeModal();
+                }
+            };
+        });
+		
+		
+function setPath(map) {
+  const flightPlanCoordinates = [
+    { lat: 21.03597053212369, lng: 105.85317270433082 },
+    { lat: 21.033867616059194, lng: 105.8533229080307 },
+    /*{ lat: -18.142, lng: 178.431 },
+    { lat: -27.467, lng: 153.027 },*/
+  ];
+  const flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+
+  flightPath.setMap(map);
+}
+
+function setMarker(map) {
+	var locations = [
+      ['Đầu phố mã mây', 21.03597053212369, 105.85317270433082],
+      ['Cuối phố mã mây', 21.033867616059194, 105.8533229080307],
+    ];
+	
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+    
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+		icon: 'images/48.png'
+      });
+      
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+}
+
+function drawFull(map) {
+	setPath(map);
+	setMarker(map);
+}
+    </script>
+</head>
+
+<body onload="initMap();" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
+  tabindex="0" >
+
+  <header id="header" class="site-header header-scrolled position-fixed text-black bg-light" style="background: #f2ece2" >
+    <nav id="header-nav" class="navbar navbar-expand-lg px-3 " style="background: #f2ece2">
+      <div class="container-fluid">
+        <ul class="navbar-translate">
+          <a href=""><li class="nav-item heveticaneu">VIETNAM</li></a>
+          <a href=""><li class="nav-item heveticaneu">ENGLISH</li></a>
+          <a href=""><li class="nav-item heveticaneu">CHINA</li></a>
+        </ul>
+        <a class="navbar-brand" href="index.html">
+          <img src="./images/01.png" class="logo" >
+        </a>
+        <button class="navbar-toggler fas fa-bars d-flex d-lg-none order-3 p-2 " type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <!-- <svg class="navbar-icon fas fa-bars"> -->
+            <use xlink:href="#navbar-icon"></use>
+          
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
+          <div class="offcanvas-header px-4 pb-0">
+            <a class="navbar-brand" href="index.html">
+              <img src="./images/01.png" class="logo">
+            </a>
+            <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul id="navbar" class="navbar-nav  justify-content-end align-items-center flex-grow-1 ">
+              <li class="nav-item">
+                <a class="nav-link me-4 heveticaneu" href="./search-infor-city.html">Tham quan phố phường</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-4 heveticaneu" href="#company-services">Về chúng tôi</a>
+              </li>
+              <div class="header-with-search">
+                <label for="mobile-search-checkbox" class="header__mobile-search">
+                  <i class="header__mobile-search-icon fas fa-search" style="color: #b7b7b7;"></i>
+              </label>
+              <!-- <div class="header__logo hide-on-tablet">
+                  <a href="./index.html" class="header__logo-link">
+                       <img class="header__logo-img" src="./assest/img/logo.png">
+                       
+                  </a>                 
+              </div> -->
+              <input type="checkbox" hidden="" id="mobile-search-checkbox" class="header__search-checkbox">
+              <div class="header__search" style="background-image: url(./images/03.png);">
+                  <div class=" header__search-input-wrap">
+                      <!-- <input type="text" id="search-input" class=" header__search-input" placeholder="Search"> -->
+                      <!-- Search history -->
+                      <!-- <div class="header__search-history">
+                          <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
+                          <ul class="header__search-history-list">
+                              <li class="header__search-history-item">
+                                  <a href="">Phố Mã Mây</a>
+                              </li>
+                              <li class="header__search-history-item">
+                                  <a href="">Phố Hàng Mã</a>
+                              </li>
+                              <li class="header__search-history-item">
+                                  <a href="">Phố Hàng Bè</a>
+                              </li>
+                          </ul>
+                      </div> -->
+                      
+                        <form autocomplete="off" class=" header__search-input">
+                          <div>
+                            <input type="text" id="input" class=" header__search-input heveticaneu" placeholder="search" style="background-color: #a9c0b2;">
+                          </div>
+                          <ul class="list">
+          
+                          </ul>
+                        </form>
+                  </div>
+                  <button id="voice-search-button" onclick="startSpeechRecognition()" class="header__search-btn">
+                    <!-- <i class="header__search-btn-icon fa-solid fa-microphone" style="color: #58574b;"></i> -->
+                    <img class="header__search-btn-icon" src="./images/04.png" alt="" style="color: #58574b;">
+                </button>
+                
+                <button class="header__search-btn">
+                  <!-- <i class="header__search-btn-icon fas fa-search" ></i> -->
+                  <img src="./images/05.png" alt="" class="header__search-btn-icon" style="color: #58574b; width: 30px;">
+              </button>
+              </div>
+              <li class="nav-item" style="background-image: url(./images/06.png); background-repeat: round; width: 60px; height: 60px; margin-left: 20px;" >
+                <div class="user-items pl-8">
+                  <ul class="d-flex justify-content-end list-unstyled">
+                    
+                    <!-- <li class="nav-item__bt fa-solid fa-volume-high"> -->
+                      <a href="#" class="volume-button" >
+                        <audio id="background-music" loop autoplay>
+                          <source src="./music/EmXinh-MONOOnionn-12581640.mp3" type="audio/mp3">
+                          Your browser does not support the audio element.
+                      </audio>
+              
+                      <button id="toggle-icon" class="nav-item__bt fa-solid fa-volume-high"></button>
+                      </a>
+                    <!-- </li> -->
+                  </ul>
+                </div>
+              </li>
+            </div></ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="col-xl-12 col-lg-12 col-md-12 col-12" style="padding-top: 156px;" >
+    <!-- Slideshow banner  -->
+
+
+
+        <!-- radio buttons end -->
+        <!-- slide image start -->
+          <!--<img onclick="closebtn()"  src="./images/map2.png" alt="Gõ Cửa Phố Phường" style="height: 100%;width: 100%;" id="doianh">-->
+		  <div  onclick="closebtn()" id="map" style="height: 820px; width: 1920px;"></div>
+
+
+      <!-- Maker Start -->
+      <div class="maker maker__map" id="marker">
+        <div class="" style="top: 220px; left: 810px; position: absolute;">
+          <img src="./images/phomamay.png"  width="180px" onclick="clickbtn(),loadmapmoi()">
+        </div>
+        <div class="" style="top: 510px; left: 905px; position: absolute;">
+          <img src="./images/phomamay.png"  width="180px" onclick="clickbtn(),loadmapmoi()">
+        </div>
+      </div>
+
+      <div class="menu">
+        <a class=" btn btn-primary btn-menu" onclick="momenutrai()" role="button" aria-controls="offcanvasExample" style="background-image: url(./images/22.png);margin-left: 16px;margin-top: -3px;">
+        </a>
+          <!-- mặc định ẩn thêm visi và tranform -->
+          <div class="offcanvas offcanvas-start offcanvas-m152 offcanvas-menu" 
+          style="opacity: 0.95; width: 525px;   margin-top: 160px; padding: 4px; background-image: url(./images/24.png); background-repeat: round;visibility: visible;transform: none;" 
+          tabindex="-1" id="offcanvasExample"   >
+            <div class="offcanvas-header" style="padding:2rem;">
+              <!-- <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5> -->
+              <a class=" btn btn-primary btn-menu" onclick="dongmenutrai()"  >
+              </a>
+           
+              <div class="header__search-menu">
+                <div class=" header__search-input-wrap">
+                    <input type="text" id="search-input" class="header__search-input--menu " placeholder="Quick search">
+                    <!-- Search history -->
+                    <div class="header__search-history">
+                        <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
+                        <ul class="header__search-history-list">
+                            <li class="header__search-history-item"  >
+                                <a href=""  >Phố Mã Mây</a>
+                            </li>
+                            <li class="header__search-history-item">
+                                <a href="">Phố Hàng Mã</a>
+                            </li>
+                            <li class="header__search-history-item">
+                                <a href="">Phố Hàng Bè</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            
+                  <img class="" src="./images/04.png" alt="" style="color: #58574b;padding-right: 20px;margin-top: -5px;">
+                  <img src="./images/kinhlup.png" alt="" class="" style="color: #58574b;margin-right: 20px;margin-top: -5px;">
+            
+            </div>
+              <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
+            </div>
+            <div class="offcanvas-body" style="padding: 0;padding-left: 20px;" id="phomamay" >
+              <div style="display: flex;">
+                <ul class="list-place" style="line-height: 2em;">
+                  <li id="myButton" class="mapli" onclick="clickbtn(),drawFull(map);" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Mã Mây</span>
+                  
+                  </li>
+                  <li class="mapli" type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" >Phố <span>Hàng Mã</span>
+                    
+                  </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Mắm</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Bè</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Bồ</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Giấy</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Đồng Lạc</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Đào</span> </li>
+                  <li  class="mapli" type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Chiếu</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Lãn Ông</span> </li>
+                  <li  class="mapli" type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Nguyễn Du</span> </li>
+                  <li  class="mapli" type="button"onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Đường</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Mành</span> </li>
+                  <li class="mapli"  type="button"onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Hòm</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span> Hàng Gà</span></li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Đồng</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Mã Mây</span> </li>
+                  
+                </ul>
+                
+                <ul class="list-place" style="line-height: 2em;">
+                  <li  class="mapli" type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Nón</span> </li>
+                  <li  class="mapli" type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Vai</span> </li>
+                  <li  class="mapli" type="button" onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Lược</span> </li>
+                  <li  class="mapli" type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Bông</span> </li>
+                  <li  class="mapli" type="button"  onclick="clickbtn(),loadmapmoi()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Lò Sũ</span> </li>
+                  <li  class="mapli" type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Nguyễn Hữu Nhân</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Tre</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Vôi</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Nguyễn Du</span> </li>
+                  <li  class="mapli" type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Đường</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Mành</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Hòm</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Gà</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Đồng</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Nón</span> </li>
+                  <li  class="mapli" type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Nguyễn Du</span> </li>
+                  <li class="mapli"  type="button" onclick="clickbtn(),loadmapmoi()"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Phố <span>Hàng Đường</span> </li>
+                </ul>
+              </div>
+              <!-- <div class="dropdown mt-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                  Dropdown button
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div> -->
+            </div>
+
+          </div>
+      </div>
+      
+      <div class="offcanvas offcanvas-end offcanvas-m152 " onclick="anmenubentrai()" tabindex="-1" id="benubenphai" style="width:300px;  background-image: url(./images/25.png); background-repeat: round;" >
+        <div class="offcanvas-header" style="display: block; padding: 10px 5px 5px 15px;">
+          <img src="./images/Ag_city.jpeg" alt="" style="width: 100%; border-radius: 15px 15px 0 0; height: 180px; object-fit: cover; margin-left:-5px; margin-right: -5px;">
+          <p id="offcanvasRightLabel "  class="bahnschrift" style="color: #679a8f; margin-top: 2rem; margin-left: 20px; font-size: 35px;font-weight: 550; font-family: bahnschrift;margin-bottom: 5px; ">Hàng Bạc </p>
+          <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
+        </div>
+        <div class="offcanvas-body cambria" style="margin: 20px; text-align: justify;      font-size: 22px;margin-top: -30px;height: 400px;white-space: normal; overflow: hidden; text-overflow: ellipsis;line-height: 1.3em;">
+          Phố Hàng Bạc, xưa là phường nghề đúc bạc, được coi là giàu có bậc nhất ở Kinh Thành Thăng Long. Trải qua nhiều thế kỷ với những biến động thời gian, 
+          nhưng phố Hàng Bạc vẫn giữ được nhiều nét kiến trúc, nếp sống làng nghề xưa.  
+          
+        </div>
+        <button class="btn-more_city" type="button"><a href="./infor-city.html" style="font-size: 18px;margin-right: 20px;color: #58574a;">XEM CHI TIẾT <i class="fas fa-angle-double-right"></i></a></button>
+      </div>
+        
+</div>
+      </div>
+    </div>
+    <!-- End Slideshow banner -->
+    
+
+  </div>
+
+  
+
+<!-- Maker -->
+<!-- <script>
+  let maker = document.getElementsByClassName("maker");
+  let place__makers = document.getElementsByClassName("place__maker");
+  function showMaker(){
+        maker.classList.add('active')
+    }
+    for(const place__maker of place__makers) {
+        place__maker.addEventListener('click', showMaker);
+
+    }
+</script> -->
+
+<script>
+  // Lấy tham chiếu đến modal và nút
+ 
+  // var span = document.getElementsByClassName("close")[0];
+
+  // Khi người dùng nhấp vào nút, hiển thị modal
+ function clickbtn() {
+  //var marker = document.getElementById("marker").style.display='block';
+  document.getElementById("benubenphai").style.visibility='visible';
+  document.getElementById("benubenphai").style.transform='none';
+  }
+
+  function closebtn() {
+  // var marker = document.getElementById("marker").style.display='none';
+  document.getElementById("benubenphai").style.visibility='';
+  document.getElementById("benubenphai").style.transform='none';
+  document.getElementById("offcanvasExample").style.visibility='';
+  document.getElementById("offcanvasExample").style.transform='none';
+  }
+
+  function momenutrai() {
+    document.getElementById("offcanvasExample").style.visibility='visible';
+  document.getElementById("offcanvasExample").style.transform='none';
+  }
+  function dongmenutrai() {
+    document.getElementById("offcanvasExample").style.visibility='';
+  document.getElementById("offcanvasExample").style.transform='none';
+  }
+
+  // Khi người dùng nhấp vào bất kỳ đâu bên ngoài modal, đóng modal
+ 
+</script>
+
+
+ 
+<!-- search -->
+<script>
+  let citys = [
+    "Phố Hàng Bạc ",
+    "Phố Hàng Mây",
+    "Phố Hàng Bông",
+    "Phố Hàng Bè",
+    "Phố Hàng Giấy",
+    "Phố Đồng Lạc",
+    "Phố Lãn Ông",
+    "Phố Nguyễn Du",
+    "Phố Hàng Đường",
+    "Phố Hàng Mành",
+    "Phố Hàng Hòm",
+    "Phố Hàng Gà",
+    "Phố Hàng Đồng",
+    "Phố Hàng Bồ"
+
+  ];
+  // Sort citys in ascending order
+  let sortedCitys = citys.sort();
+
+  // reference to
+  let input = document.getElementById("input");
+
+  // Excute function on keyup
+  input.addEventListener("keyup",(e) =>{
+    // loop through above array
+    // Initially remove al elements ( so if user erases a letter or adds new letter then clean previous output)
+    removeElements();
+    for (let i of sortedCitys) {
+      // convert input to lowercase and compare with each string
+      
+      if(i.toLowerCase().startsWith(input.value.toLowerCase()) &&
+      input.value != ""
+      ){
+        // create li element
+        let listItem = document.createElement("li");
+        // One common class name
+        listItem.classList.add("list-items");
+        listItem.style.cursor = "pointer";
+        listItem.setAttribute("onclick", "displayCitys('" + i + "')");
+        // Display matched part in bold
+        let word = "<b>" + i.substr(0, input.value.length) + "</b>";
+        word += i.substr(input.value.length);
+        // display the value in array 
+        listItem.innerHTML = word;
+        document.querySelector(".list").appendChild(listItem);
+        
+      }
+    }
+  })
+  function displayCitys(value){
+    input.value = value;
+    removeElements();
+  }
+  function removeElements(){
+    // clear all the item
+    let items = document.querySelectorAll(".list-items");
+    items.forEach((item) => {
+      item.remove();
+    });
+  }
+  
+
+</script>
+  
+  <!-- lETTER -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const letters = document.querySelectorAll('.letter');
+
+    function getRandomColor() {
+        const lettersColors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c'];
+        const randomIndex = Math.floor(Math.random() * lettersColors.length);
+        return lettersColors[randomIndex];
+    }
+
+    function playSound(note) {
+        const audio = new Audio(`./music/note${note}.mp3`);
+        audio.play();
+    }
+
+    letters.forEach((letter, index) => {
+        // Màu ngẫu nhiên khi tải trang
+        letter.style.backgroundColor = getRandomColor();
+        // Màu ngẫu nhiên khi cuộn chuột
+        window.addEventListener('scroll', function() {
+            const color = getRandomColor();
+            letter.style.backgroundColor = color;
+        });
+        // Màu ngẫu nhiên khi di chuột vào chữ cái
+        letter.addEventListener('mouseenter', function() {
+            const color = getRandomColor();
+            letter.style.backgroundColor = color;
+
+            // Phát âm thanh tương ứng với chữ cái
+            playSound(index + 1); // Thay đổi 1 thành số tương ứng với chữ cái nếu cần
+        });
+
+        // Khôi phục màu khi di chuột ra khỏi chữ cái
+        letter.addEventListener('mouseleave', function() {
+            const color = getRandomColor();
+            letter.style.backgroundColor = color;
+        });
+    });
+});
+
+
+
+</script>
+<!-- // script music -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var music = document.getElementById("background-music");
+    var iconButton = document.getElementById("toggle-icon");
+
+    iconButton.addEventListener("click", function() {
+        if (music.paused) {
+            music.play();
+            icon.classList.toggle("fa-volume-mute");
+        } else {
+            music.pause();
+            icon.classList.toggle("fa-volume-up");     
+        }
+        var icon = iconButton.querySelector("i");
+    });
+});
+
+  </script>
+
+  <!-- script voice search -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("input");
+    const voiceSearchButton = document.getElementById("voice-search-button");
+
+    function startSpeechRecognition() {
+        const recognition = new webkitSpeechRecognition(); // Sử dụng webkitSpeechRecognition cho trình duyệt Chrome
+        recognition.lang = "vi-VN";
+
+        recognition.onresult = function(event) {
+            const result = event.results[0][0].transcript;
+            searchInput.value = result;
+        };
+
+        recognition.start();
+    }
+
+    window.startSpeechRecognition = startSpeechRecognition;
+});
+
+</script>
+<script>
+   
+   function loadmapmoi(){
+    document.getElementById('doianh').src = './images/map_real-road.png';
+   }
+</script>
+  <!-- END LETTER -->
+
+  <script src="js/jquery-1.11.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="js/plugins.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <!-- <script src="./js/main.js"></script> -->
+</body>
+
+</html>

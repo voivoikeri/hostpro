@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Gõ Cửa Phố Phường</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  <!-- <script src="https://vjs.zencdn.net/5.10.4/video.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.js"></script>
+  <script src="https://rawgit.com/yanwsh/videojs-panorama/master/dist/videojs-panorama.v5.js"></script>
+  <link rel="stylesheet" href=" https://vjs.zencdn.net/5.10.4/video-js.css" /> -->
+  <script src="https://pchen66.github.io/js/three/three.min.js"></script>
+  <script src="https://rawgit.com/pchen66/panolens.js/dev/build/panolens.min.js"></script>
+  
+ <style>
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+
+.button {
+  position: absolute;
+  left: 10px;
+  padding: 1rem;
+}
+
+#controlButton {
+  top: 1rem;
+}
+
+#modeButton {
+  top: 4rem;
+}
+
+#videoButton {
+  top: 150px;
+  display: none;
+}
+
+ </style>
+
+    <!-- script
+  ================================================== -->
+  
+</head>
+
+<body >
+  <div id="container"></div>
+  <button id="controlButton" class="button">Control Toggle</button>
+  <button id="modeButton" class="button">Mode Toggle</button>
+  <button id="videoButton" class="button">Video Toggle</button>
+  <script>
+    var panorama, viewer, container, infospot, controlButton, modeButton, videoButton;
+
+var controlIndex = PANOLENS.CONTROLS.ORBIT;
+var modeIndex = 0;
+var videoPlaying = false;
+
+container = document.querySelector( '#container' );
+controlButton = document.querySelector( '#controlButton' );
+modeButton = document.querySelector( '#modeButton' );
+videoButton = document.querySelector( '#videoButton' );
+
+panorama = new PANOLENS.ImagePanorama( 'https://media.istockphoto.com/id/1192780580/vi/anh/n%C3%BAi-ph%C3%BA-s%C4%A9-c%C3%A2y-phong-%C4%91%E1%BB%8F-v%C3%A0-thuy%E1%BB%81n-ng%C6%B0-d%C3%A2n-v%E1%BB%9Bi-s%C6%B0%C6%A1ng-m%C3%B9-bu%E1%BB%95i-s%C3%A1ng-v%C3%A0o-m%C3%B9a-thu-h%E1%BB%93-kawaguchiko.jpg?s=2048x2048&w=is&k=20&c=3Im2EeXBOXpiOVDJcFQrz6kSaJavyZZ3fMTIDD9kdy4=' );
+
+infospot = new PANOLENS.Infospot( 350, PANOLENS.DataImage.Info );
+infospot.position.set( 0, -2000, -5000 );
+
+panorama.add( infospot );
+
+viewer = new PANOLENS.Viewer( { container: container } );
+viewer.add( panorama );
+
+// Method to trigger control
+controlButton.addEventListener( 'click', function(){
+
+  controlIndex = controlIndex >= 1 ? 0 : controlIndex + 1;
+  
+  switch ( controlIndex ) {
+      
+    case 0: viewer.enableControl( PANOLENS.CONTROLS.ORBIT ); break;
+    case 1: viewer.enableControl( PANOLENS.CONTROLS.DEVICEORIENTATION ); break;
+    default: break;
+      
+  }
+
+} );
+
+modeButton.addEventListener( 'click', function(){
+  
+  modeIndex = modeIndex >= 2 ? 0 : modeIndex + 1;
+  
+  switch ( modeIndex ) {
+      
+    case 0: viewer.disableEffect(); break;
+    case 1: viewer.enableEffect( PANOLENS.MODES.CARDBOARD ); break;
+    case 2: viewer.enableEffect( PANOLENS.MODES.STEREO ); break;
+    default: break;
+      
+  }
+
+} );
+
+// if it's video panorama
+videoButton.addEventListener( 'click', function(){
+  
+  videoPlaying = !videoPlaying;
+  viewer.toggleVideoPlay( videoPlaying ? false : true );
+  
+} );
+  </script>
+</body>
+
+</html>

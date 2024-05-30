@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Gõ Cửa Phố Phường</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  <script src="https://vjs.zencdn.net/5.10.4/video.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.js"></script>
+  <script src="https://rawgit.com/yanwsh/videojs-panorama/master/dist/videojs-panorama.v5.js"></script>
+  <link rel="stylesheet" href=" https://vjs.zencdn.net/5.10.4/video-js.css" />
+ <style>
+.player-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  
+  .player {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+ </style>
+
+    <!-- script
+  ================================================== -->
+  
+</head>
+
+<body >
+  <div class="player-wrapper">
+    <video id="player" class="player video-js vjs-default-skin vjs-big-play-centered" crossorigin="anonymous" preload="metadata" autoplay controls>
+      <!-- <source  src="src="https://yanwsh.github.io/videojs-panorama/assets/shark.mp4"> -->
+      <source  src="https://raw.githubusercontent.com/Pierrinho/elephant/master/elephant.mp4">
+    </video>
+  </div>
+
+  <script>
+    var options = {
+  plugins: {
+    panorama: {
+      clickAndDrag: true,
+      clickToToggle: true,
+      autoMobileOrientation: true,
+      backToVerticalCenter: false,
+      backToHorizonCenter: false
+    }
+  }
+};
+var player = videojs('player', options, function() {
+
+});
+  </script>
+</body>
+
+</html>
