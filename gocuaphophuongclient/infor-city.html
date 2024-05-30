@@ -52,6 +52,13 @@
   <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
   <script>
   
+var imageclientwidth = 0;
+function setDefaultPositionPano() {
+	$("#draggable").css({left: -999, position:'absolute'});
+	var image = document.getElementById('imageid');
+	imageclientwidth = image.clientWidth;
+	
+}
 function showhideImage() {
 	if (document.getElementById("imageid").style.display != 'block') {
 		document.getElementById("imageid").style.display = 'block';
@@ -90,6 +97,15 @@ function showhideImage() {
 		var xscroll = $("#imagescrollid").offset().left;
 		var yscroll = $("#imagescrollid").offset().top;
 		$("#imagescrollid").css({top: yscroll, left: xscroll - distance, position:'absolute'});
+		
+		var xscrollbarafterscroll = xscroll - distance;
+		if (xscrollbarafterscroll < 399) {
+			$("#imagescrollid").css({left: 399, position:'absolute'});
+		}
+		
+		if (xscrollbarafterscroll > 1633) {
+			$("#imagescrollid").css({left: 1633, position:'absolute'});
+		}
 
 	},
     start: function(e, ui) {
@@ -100,12 +116,22 @@ function showhideImage() {
         
     },
     stop: function(e, ui) {
-	stoptime = +new Date();
-	//console.log(stoptime);
-	console.log(stoptime - starttime);
-	if (stoptime - starttime < 100) {
-		showhideImage();
-	}
+		stoptime = +new Date();
+		//console.log(stoptime);
+		//console.log(stoptime - starttime);
+		if (stoptime - starttime < 100) {
+			showhideImage();
+		}
+		
+		y2 = ui.position.top;
+		if (y2 > 0) {
+			$("#draggable").css({top: 0, position:'absolute'});
+		}
+		
+        x2 = ui.position.left;
+		if (x2 > 0) {
+			$("#draggable").css({left: 0, position:'absolute'});
+		}
         
     }
 }
@@ -130,7 +156,7 @@ function showhideImage() {
         //if(x2>100){alert("greater than 100px");}
                 //if(x2<-100){alert("Lesser than -100px");}
 				
-		console.log(x2scroll - x1scroll);
+		//console.log(x2scroll - x1scroll);
 		var distance = x2scroll - x1scroll;
 		distance = distance;//*420;
 		
@@ -144,15 +170,36 @@ function showhideImage() {
         y1scroll = ui.position.top;
         x1scroll = ui.position.left;
 		starttime = +new Date();
-		console.log(starttime);
+		//console.log(starttime);
         
     },
     stop: function(e, ui) {
         y1scroll = ui.position.top;
         x1scroll = ui.position.left;
 		stoptime = +new Date();
-		console.log(stoptime);
-		console.log(stoptime - starttime);
+		console.log('scrollbar x: '+x1scroll);
+		
+		if (x1scroll < 399) {
+			$("#imagescrollid").css({left: 399, position:'absolute'});
+		}
+		
+		if (x1scroll > 1633) {
+			$("#imagescrollid").css({left: 1633, position:'absolute'});
+		}
+		
+		var xpano = $("#draggable").offset().left;
+		if (xpano > 0) {
+			$("#draggable").css({left: 0, position:'absolute'});
+		}
+		
+		if (xpano < -(imageclientwidth + 1890) ) {
+			$("#draggable").css({left: -(imageclientwidth + 1890), position:'absolute'});
+		}
+		
+
+
+		//console.log(stoptime);
+		//console.log(stoptime - starttime);
     }
 }
 	);
@@ -208,7 +255,7 @@ function zoomOutNew() {
 }
 </script>
 </head>
-<body class="zoom-in-out">
+<body class="zoom-in-out" onload="setDefaultPositionPano();">
     <!-- <header>
         <nav>
             <a href="">Home</a>
