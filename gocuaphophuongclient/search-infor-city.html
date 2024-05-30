@@ -418,19 +418,18 @@
                     onclick="hinhanh2(),hienanhlen2()"
                     type="button" data-toggle="modal" data-target=".bd-example-modal-lg2">
                     <a class="dropdown-item "> <img src="./images/47.png"
-                        style="margin-left:-30px;display:none;width: 22px;margin-top: -5p" id="hinhanh2"> Ô Quan
-                      Chưởng</a>
+                        style="margin-left:-30px;display:none;width: 22px;margin-top: -5p" id="hinhanh2"> Ô Quan Chưởng</a>
                   </li>
                   <li class="cochu-searchcity-drop"
                     onclick="hinhanh3()" type="button"
-                    data-toggle="modal" data-target=".bd-example-modal-lg2">
+                    data-toggle="modal" data-target=".bd-example-modal-lg3">
                     <a class="dropdown-item "> <img src="./images/47.png"
                         style="margin-left:-30px;display:none;width: 22px;margin-top: -5p" id="hinhanh3"> Tháp Rùa </a>
                   </li>
-                  <li class="cochu-searchcity-drop" onclick="hinhanh4()" data-toggle="modal" data-target=".bd-example-modal-lg2"><a class="dropdown-item " href="#">
+                  <li class="cochu-searchcity-drop" onclick="hinhanh4()" data-toggle="modal" data-target=".bd-example-modal-lg4"><a class="dropdown-item " href="#">
                       <img src="./images/47.png" style="margin-left:-30px;display:none;width: 22px;margin-top: -5p"
                         id="hinhanh4"> Đền Bạch Mã</a></li>
-                  <li class="cochu-searchcity-drop" onclick="hinhanh5()" data-toggle="modal" data-target=".bd-example-modal-lg2"><a class="dropdown-item " href="#">
+                  <li class="cochu-searchcity-drop" onclick="hinhanh5()" data-toggle="modal" data-target=".bd-example-modal-lg5"><a class="dropdown-item " href="#">
                       <img src="./images/47.png" style="margin-left:-30px;display:none;width: 22px;margin-top: -5p"
                         id="hinhanh5"> Tháp Hòa Phong</a></li>
                 </ul>
@@ -511,7 +510,7 @@
 
 
   <div onclick="anhinhgionuoc()" class=" modall  bd-example-modal-lg2" tabindex="-1" role="dialog"
-    aria-labelledby="myLargeModalLabel" aria-hidden="true" id="menochitiet" style="margin-left: -140px;">
+    aria-labelledby="myLargeModalLabel" aria-hidden="false" id="menochitiet" style="margin-left: -140px;">
     <div class="modal-dialog modal-md" style="top: 5%;">
         <div class="modal-content"
           style="display: flex; width: 670px;height:250px ;flex-direction: row;background-image: url(./images/50.png); ">
@@ -537,8 +536,6 @@
       </div>
     </div>
   </div>
-
-
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -646,24 +643,39 @@
     // khi nhấn vào menu bên trái
     function hinhanh2() {
 	  marker.setIcon('images/49.png');
+	  marker2.setIcon('images/48.png');
+	  marker3.setIcon('images/48.png');
+	  marker4.setIcon('images/48.png');
       document.getElementById('hinhanh2').style.display = '';
       document.getElementById('hinhanh3').style.display = 'none';
       document.getElementById('hinhanh4').style.display = 'none';
       document.getElementById('hinhanh5').style.display = 'none';
     }
     function hinhanh3() {
+	  marker.setIcon('images/48.png');
+	  marker2.setIcon('images/49.png');
+	  marker3.setIcon('images/48.png');
+	  marker4.setIcon('images/48.png');
       document.getElementById('hinhanh3').style.display = '';
       document.getElementById('hinhanh2').style.display = 'none';
       document.getElementById('hinhanh4').style.display = 'none';
       document.getElementById('hinhanh5').style.display = 'none';
     }
     function hinhanh4() {
+	  marker.setIcon('images/48.png');
+	  marker2.setIcon('images/48.png');
+	  marker3.setIcon('images/49.png');
+	  marker4.setIcon('images/48.png');
       document.getElementById('hinhanh4').style.display = '';
       document.getElementById('hinhanh2').style.display = 'none';
       document.getElementById('hinhanh3').style.display = 'none';
       document.getElementById('hinhanh5').style.display = 'none';
     }
     function hinhanh5() {
+	  marker.setIcon('images/48.png');
+	  marker2.setIcon('images/48.png');
+	  marker3.setIcon('images/48.png');
+	  marker4.setIcon('images/49.png');
       document.getElementById('hinhanh5').style.display = '';
       document.getElementById('hinhanh2').style.display = 'none';
       document.getElementById('hinhanh3').style.display = 'none';
