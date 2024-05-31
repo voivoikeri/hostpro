@@ -53,6 +53,7 @@
   <script>
   
 var imageclientwidth = 0;
+var zoomPercent = 1;
 function setDefaultPositionPano() {
 	$("#draggable").css({left: -999, position:'absolute'});
 	var image = document.getElementById('imageid');
@@ -162,7 +163,9 @@ function showhideImage() {
 		
 		var xpano = $("#draggable").offset().left;
 		var ypano = $("#draggable").offset().top;
-		$("#draggable").css({top: ypano, left: xpano - distance, position:'absolute'});
+		
+		
+		$("#draggable").css({top: ypano, left: (xpano - distance)*zoomPercent/100, position:'absolute'});
 
                
     },
@@ -192,8 +195,8 @@ function showhideImage() {
 			$("#draggable").css({left: 0, position:'absolute'});
 		}
 		
-		if (xpano < -(imageclientwidth + 1890) ) {
-			$("#draggable").css({left: -(imageclientwidth + 1890), position:'absolute'});
+		if (xpano < 1820 - imageclientwidth) {
+			$("#draggable").css({left: 1820 - imageclientwidth, position:'absolute'});
 		}
 		
 
@@ -209,13 +212,21 @@ function showhideImage() {
   function moveImageLeft() {
 	var xpano = $("#draggable").offset().left;
 	var ypano = $("#draggable").offset().top;
-	$("#draggable").css({top: ypano, left: xpano - 100, position:'absolute'});
+	var distance = xpano - 100;
+	if (distance < 1820 - imageclientwidth ) {
+		distance = 1820 - imageclientwidth;
+	}
+	$("#draggable").css({top: ypano, left: distance, position:'absolute'});
   }
   
   function moveImageRight() {
 	var xpano = $("#draggable").offset().left;
 	var ypano = $("#draggable").offset().top;
-	$("#draggable").css({top: ypano, left: xpano + 100, position:'absolute'});
+	var distance = xpano + 100;
+	if (distance > 0) {
+		distance = 0;
+	}
+	$("#draggable").css({top: ypano, left: distance, position:'absolute'});
   }
   </script>
   
@@ -236,6 +247,8 @@ function zoomInNew() {
 		image.style.width = zoomPercent + "%";
 		image.style.height = zoomPercent + "%";
 	}
+	
+	imageclientwidth = imageclientwidth*zoomPercent/100;
 }
 
 function zoomOutNew() {
@@ -252,6 +265,7 @@ function zoomOutNew() {
 		image.style.width = zoomPercent + "%";
 		image.style.height = zoomPercent + "%";
 	}
+	imageclientwidth = imageclientwidth*zoomPercent/100;
 }
 </script>
 </head>
