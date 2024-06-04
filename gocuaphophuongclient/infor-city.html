@@ -45,7 +45,7 @@
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <style>
-  #draggable { width: 42682px; height: 2341px; padding: 0.5em; }
+  #draggable { width: 26682px; height: 2341px; padding: 0.5em; }
   #imagescrollid { width: 67px; height: 266px; padding: 0.5em; }
   </style>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -95,7 +95,7 @@ function showhideImage() {
 				
 		//console.log(x2 - x1);
 		var distance = x2 - x1;
-		distance = distance/420;
+		distance = distance/(imageclientwidth/scrollbarimageWidth);
 
 		var xscroll = $("#imagescrollid").offset().left;
 		var yscroll = $("#imagescrollid").offset().top;
@@ -161,9 +161,9 @@ function showhideImage() {
 				
 		//console.log(x2scroll - x1scroll);
 		var distance = x2scroll - x1scroll;
-		//console.log(distance + ' scale scrollbar vs imagewidth: ' + imageclientwidth/scrollbarimageWidth);
+		console.log(distance + ' scale scrollbar vs imagewidth: ' + imageclientwidth/scrollbarimageWidth);
 
-		//distance = distance*(imageclientwidth/scrollbarimageWidth);
+		distance = distance*(imageclientwidth/scrollbarimageWidth);
 		
 		var xpano = $("#draggable").offset().left;
 		var ypano = $("#draggable").offset().top;
