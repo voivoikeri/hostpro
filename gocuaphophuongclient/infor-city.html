@@ -51,13 +51,15 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
   <script>
+
   
 var imageclientwidth = 0;
-var zoomPercent = 1;
+var scrollbarimageWidth = 922;
 function setDefaultPositionPano() {
-	$("#draggable").css({left: -999, position:'absolute'});
 	var image = document.getElementById('imageid');
 	imageclientwidth = image.clientWidth;
+	$("#draggable").css({left: -500*imageclientwidth/scrollbarimageWidth, position:'absolute'});
+
 	
 }
 function showhideImage() {
@@ -159,13 +161,14 @@ function showhideImage() {
 				
 		//console.log(x2scroll - x1scroll);
 		var distance = x2scroll - x1scroll;
-		distance = distance;//*420;
+		//console.log(distance + ' scale scrollbar vs imagewidth: ' + imageclientwidth/scrollbarimageWidth);
+
+		//distance = distance*(imageclientwidth/scrollbarimageWidth);
 		
 		var xpano = $("#draggable").offset().left;
 		var ypano = $("#draggable").offset().top;
 		
-		
-		$("#draggable").css({top: ypano, left: (xpano - distance)*zoomPercent/100, position:'absolute'});
+		$("#draggable").css({top: ypano, left: xpano - distance, position:'absolute'});
 
                
     },
@@ -182,12 +185,12 @@ function showhideImage() {
 		stoptime = +new Date();
 		console.log('scrollbar x: '+x1scroll);
 		
-		if (x1scroll < 399) {
-			$("#imagescrollid").css({left: 399, position:'absolute'});
+		if (x1scroll < 500) {
+			$("#imagescrollid").css({left: 500, position:'absolute'});
 		}
 		
-		if (x1scroll > 1633) {
-			$("#imagescrollid").css({left: 1633, position:'absolute'});
+		if (x1scroll > 1699) {
+			$("#imagescrollid").css({left: 1699, position:'absolute'});
 		}
 		
 		var xpano = $("#draggable").offset().left;
@@ -198,9 +201,6 @@ function showhideImage() {
 		if (xpano < 1820 - imageclientwidth) {
 			$("#draggable").css({left: 1820 - imageclientwidth, position:'absolute'});
 		}
-		
-
-
 		//console.log(stoptime);
 		//console.log(stoptime - starttime);
     }
@@ -232,7 +232,7 @@ function showhideImage() {
   
 <script language="javascript">
 var zoomPercent = 100;
-function zoomInNew() {
+function zoomInNew(percent) {
 	var image = document.getElementById('imageid');
 	if (document.getElementById("imageid").style.display != 'block') {
 		image = document.getElementById('imageid2');
@@ -243,15 +243,13 @@ function zoomInNew() {
   
 	 // when the user presses the 'p' key, zoom in
 	if (zoomPercent < 100) {
-		zoomPercent += 5;
+		zoomPercent += percent;
 		image.style.width = zoomPercent + "%";
 		image.style.height = zoomPercent + "%";
 	}
-	
-	imageclientwidth = imageclientwidth*zoomPercent/100;
 }
 
-function zoomOutNew() {
+function zoomOutNew(percent) {
 	var image = document.getElementById('imageid');
 	if (document.getElementById("imageid").style.display != 'block') {
 		image = document.getElementById('imageid2');
@@ -261,11 +259,10 @@ function zoomOutNew() {
 	 let height = image.clientHeight;
 
 	if (zoomPercent > 10) {
-		zoomPercent -= 5;
+		zoomPercent -= percent;
 		image.style.width = zoomPercent + "%";
 		image.style.height = zoomPercent + "%";
 	}
-	imageclientwidth = imageclientwidth*zoomPercent/100;
 }
 </script>
 </head>
@@ -355,7 +352,7 @@ function zoomOutNew() {
                   <div class="user-items pl-8">
                     <ul class="d-flex justify-content-end list-unstyled">
                       <!-- <li class="nav-item__bt fa-solid fa-volume-high"> -->
-                        <img onclick="zoomInNew()" id="zoom-in2"  src="./images/31.png" width="40px" alt="">
+                        <img onclick="zoomInNew(5)" id="zoom-in2"  src="./images/31.png" width="40px" alt="">
                         <!-- <button id="toggle-icon" class="nav-item__bt fa-solid fas fa-plus" style="padding: 8px 10px;"></button> -->
                       <!-- </li> -->
                     </ul>
@@ -367,7 +364,7 @@ function zoomOutNew() {
                   <div class="user-items pl-8">
                     <ul class="d-flex justify-content-end list-unstyled">
                       <!-- <li class="nav-item__bt fa-solid fa-volume-high"> -->
-                        <img onclick="zoomOutNew()" id="zoom-out2"  src="./images/32.png" width="40px" alt="">
+                        <img onclick="zoomOutNew(5)" id="zoom-out2"  src="./images/32.png" width="40px" alt="">
                         <!-- <button id="toggle-icon" class="nav-item__bt fas fa-window-minimize" style="background-color: #e2c693; box-shadow: 0px 2px #e2c693; padding: 8px 8px;"></button> -->
                       <!-- </li> -->
                     </ul>
@@ -596,8 +593,47 @@ function ZoomOut() {
   });
   
     </script>
-    <script src="./js/main.js"></script>
-	
 
+    <script src="./js/main.js"></script>
+<script>	
+// This function checks if the specified event is supported by the browser.
+// Source: http://perfectionkills.com/detecting-event-support-without-browser-sniffing/
+function isEventSupported(eventName) {
+    var el = document.createElement('div');
+    eventName = 'on' + eventName;
+    var isSupported = (eventName in el);
+    if (!isSupported) {
+        el.setAttribute(eventName, 'return;');
+        isSupported = typeof el[eventName] == 'function';
+    }
+    el = null;
+    return isSupported;
+}
+
+$(document).ready(function() {
+    // Check which wheel event is supported. Don't use both as it would fire each event 
+    // in browsers where both events are supported.
+    var wheelEvent = isEventSupported('mousewheel') ? 'mousewheel' : 'wheel';
+
+    // Now bind the event to the desired element
+    $('#draggable').on(wheelEvent, function(e) {
+        var oEvent = e.originalEvent,
+            delta  = oEvent.deltaY || oEvent.wheelDelta;
+
+        // deltaY for wheel event
+        // wheelData for mousewheel event
+
+        if (delta > 0) {
+            // Scrolled up
+			console.log('Scrolled up');
+			zoomInNew(1);
+        } else {
+            // Scrolled down
+			console.log('Scrolled down');
+			zoomOutNew(1);
+        }
+    });
+});
+    </script>
 </body>
 </html>
